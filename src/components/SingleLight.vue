@@ -1,37 +1,62 @@
 <template>
-
-    <img src="../assets/light.png" />
-<!-- <svg version="1.1" id="single-light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 960 960" enable-background="new 0 0 960 960" xml:space="preserve">
-<g id="Layer_1_1_" display="none">
-</g>
-<g id="Layer_2">
-	<g>
-		
-			<radialGradient id="SVGID_1_" cx="304.542" cy="563.542" r="480.5527" gradientTransform="matrix(1 0 0 -1 174 1045)" gradientUnits="userSpaceOnUse">
-			<stop  offset="0.4516" style="stop-color:#FFFFFF"/>
-			<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-		</radialGradient>
-		<circle fill="url(#SVGID_1_)" cx="478.542" cy="481.458" r="480.553"/>
-	</g>
-</g>
-</svg> -->
-
+  <svg class="led" viewBox="0 0 1 1">
+    <defs>
+      <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop class="stop-inner" offset="10%" style="stop-opacity:1"></stop>
+        <stop class="stop-inner" offset="20%" style="stop-opacity:.3"></stop>
+        <stop class="stop-inner" offset="50%" style="stop-opacity:.1"></stop>
+        <stop class="stop-outer" offset="100%" style="stop-opacity:0"></stop>
+      </radialGradient>
+    </defs>
+    <circle cx="50%" cy="50%" r="120%" fill="url(#grad1)"></circle>
+  </svg>
 </template>
 
 <script>
 export default {
-  name: 'single-light',
-//   props: ['width', 'height'],
+  name: "single-light",
+  props: {
+    dims: { x: String, y: Number }
+  }
 };
 </script>
 
 <style scoped>
-/* #single-light {
-    fill: red;
+@keyframes rainbow {
+  0% {
+    stop-color: hsl(0, 100%, 50%);
+  }
+  12% {
+    stop-color: hsl(31, 100%, 50%);
+  }
+  25% {
+    stop-color: hsl(63, 100%, 50%);
+  }
+  37% {
+    stop-color: hsl(95, 100%, 50%);
+  }
+  50% {
+    stop-color: hsl(127, 100%, 50%);
+  }
+  62% {
+    stop-color: hsl(159, 100%, 50%);
+  }
+  75% {
+    stop-color: hsl(191, 100%, 50%);
+  }
+  87% {
+    stop-color: hsl(223, 100%, 60%);
+  }
+  100% {
+    stop-color: hsl(255, 100%, 60%);
+  }
 }
 
-#SVGID_1_ {
-    fill: green;
-} */
+.stop-inner {
+  animation: rainbow 10s infinite alternate;
+}
+
+.led {
+  overflow: visible;
+}
 </style>
