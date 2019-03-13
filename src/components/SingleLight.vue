@@ -1,23 +1,21 @@
 <template>
-  <svg class="led" viewBox="0 0 1 1">
-    <defs>
-      <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-        <stop class="stop-inner" offset="10%" style="stop-opacity:1"></stop>
-        <stop class="stop-inner" offset="20%" style="stop-opacity:.3"></stop>
-        <stop class="stop-inner" offset="50%" style="stop-opacity:.1"></stop>
-        <stop class="stop-outer" offset="100%" style="stop-opacity:0"></stop>
-      </radialGradient>
-    </defs>
-    <circle cx="50%" cy="50%" r="120%" fill="url(#grad1)"></circle>
-  </svg>
+    <svg class="led" viewBox="0 0 1 1">
+      <defs>
+        <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+          <stop class="stop-inner" offset="10%" style="stop-opacity:1"></stop>
+          <stop class="stop-inner" offset="20%" style="stop-opacity:.3"></stop>
+          <stop class="stop-inner" offset="50%" style="stop-opacity:.1"></stop>
+          <stop class="stop-outer" offset="100%" style="stop-opacity:0"></stop>
+        </radialGradient>
+      </defs>
+      <circle cx="50%" cy="50%" r="120%" fill="url(#grad1)"></circle>
+    </svg>
 </template>
 
 <script>
 export default {
   name: "single-light",
-  props: {
-    dims: { x: String, y: Number }
-  }
+
 };
 </script>
 
@@ -59,4 +57,6 @@ export default {
 .led {
   overflow: visible;
 }
+
+
 </style>

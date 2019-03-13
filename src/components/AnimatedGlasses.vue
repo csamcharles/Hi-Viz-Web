@@ -40,7 +40,7 @@ export default {
 
   computed: {
     lightSquareWidth: function() {
-      return 0.487 * this.windowWidth;
+      return 0.4865 * this.windowWidth;
     },
 
     lightSquareHeight: function() {
@@ -70,7 +70,7 @@ export default {
 }
 
 #lights-square {
-  z-index: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

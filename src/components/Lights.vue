@@ -1,18 +1,31 @@
 <template>
   <div>
     <div class="led-row" id="top-row">
-      <SingleLight
-        class="singleLight"
-        v-for="(light, index) in lightsArray"
-        v-bind:key="index"
-        v-bind:style="{
-                        left: light.xpos + 'px',
-                        top: light.ypos + 'px',
-                        height: light.height + 'px',
-                        '-webkit-transform': `perspective(${light.perspective}px) rotateY(${light.angle}rad)`,
-                        transform: `perspective(${light.perspective}px) rotateY(${light.angle}rad)`,
-                        }"
-      />
+      <transition-group name="fade">
+        <span v-for="light in lightsArray" v-bind:key="light.index">
+          <SingleLight
+            class="singleLight"
+            v-show="lightsVisibleArray[light.index]"
+            v-bind:style="{
+                    left: light.xpos + 'px',
+                    top: light.ypos + 'px',
+                    height: light.height + 'px',
+                    '-webkit-transform': `perspective(${light.perspective}px) rotateY(${light.angle}rad)`,
+                    transform: `perspective(${light.perspective}px) rotateY(${light.angle}rad)`,
+              }"
+          />
+          <div
+            class="led-container"
+            @mouseover="toggleLight(light.index)"
+            v-bind:style="{
+                  left: light.xpos + 'px',
+                  top: light.ypos + 'px',
+                  height: light.height + 'px',
+                  width: light.height + 'px',
+            }"
+          ></div>
+        </span>
+      </transition-group>
     </div>
     <div class="led-row" id="bottom-row">
       <SingleLight
@@ -33,6 +46,7 @@
 
 <script>
 import SingleLight from "./SingleLight.vue";
+import Vue from "vue";
 
 export default {
   name: "lights",
@@ -48,15 +62,33 @@ export default {
     return {
       ready: false,
       numLights: 10,
-      lensAngle: { x: 133.0, y: 12 }
+      lensAngle: { x: 133.0, y: 12 },
+      lightsVisibleArray: []
     };
   },
 
   mounted() {
     this.ready = true;
+    this.lightsVisibleArray = this.populateLightsVisibleArray();
   },
 
   methods: {
+    populateLightsVisibleArray: function() {
+      let array = [];
+      for (let i = 0; i < this.numLights; i++) {
+        array[i] = false;
+      }
+      return array;
+    },
+
+    toggleLight: function(index) {
+      Vue.set(this.lightsVisibleArray, index, !this.lightsVisibleArray[index]);
+    },
+
+    checkVisible: function(index) {
+      return this.lightsVisibleArray[index];
+    },
+
     toRadians: function(angle) {
       return angle * (Math.PI / 180);
     },
@@ -123,6 +155,8 @@ export default {
         pos.x = pos.x - width / 2;
 
         lightsArray[i] = {
+          index: i,
+          show: false,
           xpos: pos.x,
           ypos: pos.y,
           height: height,
@@ -143,6 +177,12 @@ export default {
   height: 20%;
 }
 
+.led-container {
+  position: absolute;
+  border: 2px solid red;
+  overflow: visible;
+}
+
 #top-row {
   top: 0;
 }
@@ -153,5 +193,18 @@ export default {
 
 .singleLight {
   position: absolute;
+}
+
+.fade-enter-active {
+  transition: 0.1s ease-in;
+}
+
+.fade-leave-active {
+  transition: 1s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

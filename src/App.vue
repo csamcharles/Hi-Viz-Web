@@ -45,7 +45,7 @@ export default {
 #app {
   display: flex;
   height: 100vh;
-  background-color: #1f1f1f;
+  background-color: #0f0f0f;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
